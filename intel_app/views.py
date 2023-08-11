@@ -89,7 +89,7 @@ def pay_with_wallet(request):
                     transaction_status="Failed"
                 )
                 new_transaction.save()
-                return JsonResponse({'status': 'Something went wrong'})
+                return JsonResponse({'status': 'Something went wrong', 'icon': 'error'})
     return redirect('airtel-tigo')
 
 
