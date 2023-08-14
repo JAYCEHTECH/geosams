@@ -38,7 +38,7 @@ def pay_with_wallet(request):
         print(data)
 
         sms_headers = {
-            'Authorization': 'Bearer 1050|VDqcCUHwCBEbjcMk32cbdOhCFlavpDhy6vfgM4jU',
+            'Authorization': 'Bearer 1136|LwSl79qyzTZ9kbcf9SpGGl1ThsY0Ujf7tcMxvPze',
             'Content-Type': 'application/json'
         }
 
@@ -55,29 +55,29 @@ def pay_with_wallet(request):
                 new_transaction.save()
                 user.wallet -= float(amount)
                 user.save()
-                # receiver_message = f"Your bundle purchase has been completed successfully. {bundle}MB has been credited to you by {request.user.phone}.\nReference: {reference}\n"
-                # sms_message = f"Hello @{request.user.username}. Your bundle purchase has been completed successfully. {bundle}MB has been credited to {phone_number}.\nReference: {reference}\nCurrent Wallet Balance: {user.wallet}\nThank you for using Noble Data GH.\n\nThe Noble Data GH"
-                #
-                # num_without_0 = phone_number[1:]
-                # print(num_without_0)
-                # receiver_body = {
-                #     'recipient': f"233{num_without_0}",
-                #     'sender_id': 'Noble Data',
-                #     'message': receiver_message
-                # }
-                #
-                # response = requests.request('POST', url=sms_url, params=receiver_body, headers=sms_headers)
-                # print(response.text)
+                receiver_message = f"Your bundle purchase has been completed successfully. {bundle}MB has been credited to you by {request.user.phone}.\nReference: {reference}\n"
+                sms_message = f"Hello @{request.user.username}. Your bundle purchase has been completed successfully. {bundle}MB has been credited to {phone_number}.\nReference: {reference}\nCurrent Wallet Balance: {user.wallet}\nThank you for using Geosams.\n\nGeosams"
 
-                # sms_body = {
-                #     'recipient': f"233{request.user.phone}",
-                #     'sender_id': 'Noble Data',
-                #     'message': sms_message
-                # }
-                #
-                # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
-                #
-                # print(response.text)
+                num_without_0 = phone_number[1:]
+                print(num_without_0)
+                receiver_body = {
+                    'recipient': f"233{num_without_0}",
+                    'sender_id': 'Geosams',
+                    'message': receiver_message
+                }
+
+                response = requests.request('POST', url=sms_url, params=receiver_body, headers=sms_headers)
+                print(response.text)
+
+                sms_body = {
+                    'recipient': f"233{request.user.phone}",
+                    'sender_id': 'Geosams',
+                    'message': sms_message
+                }
+
+                response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
+
+                print(response.text)
 
                 return JsonResponse({'status': 'Transaction Completed Successfully', 'icon': 'success'})
             else:
@@ -135,7 +135,7 @@ def airtel_tigo(request):
         print(data)
 
         sms_headers = {
-            'Authorization': 'Bearer 1050|VDqcCUHwCBEbjcMk32cbdOhCFlavpDhy6vfgM4jU',
+            'Authorization': 'Bearer 1136|LwSl79qyzTZ9kbcf9SpGGl1ThsY0Ujf7tcMxvPze',
             'Content-Type': 'application/json'
         }
 
@@ -151,44 +151,44 @@ def airtel_tigo(request):
                 print(request.user.phone)
                 print("***********")
                 receiver_message = f"Your bundle purchase has been completed successfully. {bundle}MB has been credited to you by {request.user.phone}.\nReference: {payment_reference}\n"
-                sms_message = f"Hello @{request.user.username}. Your bundle purchase has been completed successfully. {bundle}MB has been credited to {phone_number}.\nReference: {payment_reference}\nThank you for using Noble Data GH.\n\nThe Noble Data GH"
+                sms_message = f"Hello @{request.user.username}. Your bundle purchase has been completed successfully. {bundle}MB has been credited to {phone_number}.\nReference: {payment_reference}\nThank you for using Geosams GH.\n\nThe Geosams GH"
 
-                # num_without_0 = phone_number[1:]
-                # print(num_without_0)
-                # receiver_body = {
-                #     'recipient': f"233{num_without_0}",
-                #     'sender_id': 'Noble Data',
-                #     'message': receiver_message
-                # }
-                #
-                # response = requests.request('POST', url=sms_url, params=receiver_body, headers=sms_headers)
-                # print(response.text)
-                #
-                # sms_body = {
-                #     'recipient': f"233{request.user.phone}",
-                #     'sender_id': 'Noble Data',
-                #     'message': sms_message
-                # }
-                #
-                # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
+                num_without_0 = phone_number[1:]
+                print(num_without_0)
+                receiver_body = {
+                    'recipient': f"233{num_without_0}",
+                    'sender_id': 'Geosams',
+                    'message': receiver_message
+                }
 
-                # print(response.text)
+                response = requests.request('POST', url=sms_url, params=receiver_body, headers=sms_headers)
+                print(response.text)
+
+                sms_body = {
+                    'recipient': f"233{request.user.phone}",
+                    'sender_id': 'Geosams',
+                    'message': sms_message
+                }
+
+                response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
+
+                print(response.text)
 
                 return JsonResponse({'status': 'Transaction Completed Successfully', 'icon': 'success'})
             else:
                 transaction_to_be_updated = models.IShareBundleTransaction.objects.get(reference=payment_reference)
                 transaction_to_be_updated.transaction_status = "Failed"
                 new_transaction.save()
-                sms_message = f"Hello @{request.user.username}. Something went wrong with your transaction. Contact us for enquiries.\nBundle: {bundle}MB\nPhone Number: {phone_number}.\nReference: {payment_reference}\nThank you for using Noble Data GH.\n\nThe Noble Data GH"
+                sms_message = f"Hello @{request.user.username}. Something went wrong with your transaction. Contact us for enquiries.\nBundle: {bundle}MB\nPhone Number: {phone_number}.\nReference: {payment_reference}\nThank you for using Geosams GH.\n\nThe Geosams GH"
 
                 sms_body = {
                     'recipient': f"233{request.user.phone}",
-                    'sender_id': 'Noble Data',
+                    'sender_id': 'Geosams',
                     'message': sms_message
                 }
                 # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
                 # print(response.text)
-                # r_sms_url = f"https://sms.arkesel.com/sms/api?action=send-sms&api_key=UmpEc1JzeFV4cERKTWxUWktqZEs&to={phone_number}&from=Noble Data GH&sms={receiver_message}"
+                # r_sms_url = f"https://sms.arkesel.com/sms/api?action=send-sms&api_key=UmpEc1JzeFV4cERKTWxUWktqZEs&to={phone_number}&from=Geosams GH&sms={receiver_message}"
                 # response = requests.request("GET", url=r_sms_url)
                 # print(response.text)
                 return JsonResponse({'status': 'Something went wrong', 'icon': 'error'})
@@ -196,11 +196,11 @@ def airtel_tigo(request):
             transaction_to_be_updated = models.IShareBundleTransaction.objects.get(reference=payment_reference)
             transaction_to_be_updated.transaction_status = "Failed"
             new_transaction.save()
-            sms_message = f"Hello @{request.user.username}. Something went wrong with your transaction. Contact us for enquiries.\nBundle: {bundle}MB\nPhone Number: {phone_number}.\nReference: {payment_reference}\nThank you for using Noble Data GH.\n\nThe Noble Data GH"
+            sms_message = f"Hello @{request.user.username}. Something went wrong with your transaction. Contact us for enquiries.\nBundle: {bundle}MB\nPhone Number: {phone_number}.\nReference: {payment_reference}\nThank you for using Geosams GH.\n\nThe Geosams GH"
 
             sms_body = {
                 'recipient': f'233{request.user.phone}',
-                'sender_id': 'Noble Data',
+                'sender_id': 'Geosams',
                 'message': sms_message
             }
 
@@ -215,6 +215,7 @@ def airtel_tigo(request):
 
 def mtn_pay_with_wallet(request):
     if request.method == "POST":
+        admin = models.AdminInfo.objects.filter().first().phone_number
         user = models.CustomUser.objects.get(id=request.user.id)
         phone_number = request.POST.get("phone")
         amount = request.POST.get("amount")
@@ -223,7 +224,7 @@ def mtn_pay_with_wallet(request):
         print(amount)
         print(reference)
         sms_headers = {
-            'Authorization': 'Bearer 1050|VDqcCUHwCBEbjcMk32cbdOhCFlavpDhy6vfgM4jU',
+            'Authorization': 'Bearer 1136|LwSl79qyzTZ9kbcf9SpGGl1ThsY0Ujf7tcMxvPze',
             'Content-Type': 'application/json'
         }
 
@@ -247,12 +248,12 @@ def mtn_pay_with_wallet(request):
         user.wallet -= float(amount)
         user.save()
         sms_body = {
-            'recipient': "233549914001",
-            'sender_id': 'Noble Data',
+            'recipient': f"233{admin}",
+            'sender_id': 'Geosams',
             'message': sms_message
         }
-        # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
-        # print(response.text)
+        response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
+        print(response.text)
         return JsonResponse({'status': "Your transaction will be completed shortly", 'icon': 'success'})
     return redirect('mtn')
 
@@ -262,6 +263,7 @@ def mtn(request):
     form = forms.MTNForm()
     reference = helper.ref_generator()
     user_email = request.user.email
+    admin = models.AdminInfo.objects.filter().first().phone_number
     if request.method == "POST":
         payment_reference = request.POST.get("reference")
         amount_paid = request.POST.get("amount")
@@ -287,7 +289,7 @@ def mtn(request):
         )
         new_mtn_transaction.save()
         sms_headers = {
-            'Authorization': 'Bearer 1050|VDqcCUHwCBEbjcMk32cbdOhCFlavpDhy6vfgM4jU',
+            'Authorization': 'Bearer 1136|LwSl79qyzTZ9kbcf9SpGGl1ThsY0Ujf7tcMxvPze',
             'Content-Type': 'application/json'
         }
 
@@ -295,12 +297,12 @@ def mtn(request):
         sms_message = f"An order has been placed. {bundle}MB for {phone_number}"
 
         sms_body = {
-            'recipient': "233549914001",
-            'sender_id': 'Noble Data',
+            'recipient': f"233{admin}",
+            'sender_id': 'Geosams',
             'message': sms_message
         }
-        # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
-        # print(response.text)
+        response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
+        print(response.text)
         return JsonResponse({'status': "Your transaction will be completed shortly", 'icon': 'success'})
     user = models.CustomUser.objects.get(id=request.user.id)
     context = {'form': form, "ref": reference, "email": user_email, "wallet": 0 if user.wallet is None else user.wallet}
@@ -361,7 +363,7 @@ def mark_as_sent(request, pk):
         txn.transaction_status = "Completed"
         txn.save()
         sms_headers = {
-            'Authorization': 'Bearer 1050|VDqcCUHwCBEbjcMk32cbdOhCFlavpDhy6vfgM4jU',
+            'Authorization': 'Bearer 1136|LwSl79qyzTZ9kbcf9SpGGl1ThsY0Ujf7tcMxvPze',
             'Content-Type': 'application/json'
         }
 
@@ -370,11 +372,11 @@ def mark_as_sent(request, pk):
 
         sms_body = {
             'recipient': f"233{txn.bundle_number}",
-            'sender_id': 'Noble Data',
+            'sender_id': 'Geosams',
             'message': sms_message
         }
-        # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
-        # print(response.text)
+        response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
+        print(response.text)
         return redirect('mtn_admin')
 
 
