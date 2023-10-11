@@ -209,7 +209,7 @@ def airtel_tigo(request):
             # print(response.text)
             return JsonResponse({'status': 'Something went wrong', 'icon': 'error'})
     user = models.CustomUser.objects.get(id=request.user.id)
-    context = {"form": form, "ref": reference, "email": user_email, "wallet": 0 if user.wallet is None else user.wallet }
+    context = {"form": form, "ref": reference, "email": user_email, "wallet": 0 if user.wallet is None else user.wallet}
     return render(request, "layouts/services/at.html", context=context)
 
 
