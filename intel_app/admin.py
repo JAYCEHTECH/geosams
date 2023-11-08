@@ -40,10 +40,15 @@ class PaymentAdmin(admin.ModelAdmin):
     list_display = ['user', 'reference', 'transaction_date', 'amount']
 
 
+class TopUpRequestAdmin(admin.ModelAdmin):
+    list_display = ['user', 'reference', 'amount', 'date', 'status']
+
+
 admin.site.register(models.CustomUser, CustomUserAdmin)
 admin.site.register(models.IShareBundleTransaction, IShareBundleTransactionAdmin)
 admin.site.register(models.MTNTransaction, MTNTransactionAdmin)
 admin.site.register(models.IshareBundlePrice)
 admin.site.register(models.MTNBundlePrice)
+admin.site.register(models.TopUpRequest, TopUpRequestAdmin)
 admin.site.register(models.Payment, PaymentAdmin)
 admin.site.register(models.AdminInfo)
