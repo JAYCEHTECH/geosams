@@ -33,7 +33,7 @@ class AdminInfo(models.Model):
         ("Vodafone Cash", "Vodafone Cash"),
         ("AT Money", "AT Money")
     )
-    payment_channel = models.CharField(max_length=250, choices=choices)
+    payment_channell = models.CharField(max_length=250, choices=choices)
 
 
 class IShareBundleTransaction(models.Model):
