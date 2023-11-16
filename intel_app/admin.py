@@ -13,7 +13,7 @@ class CustomUserAdmin(UserAdmin):
             'Other Personal info',
             {
                 'fields': (
-                    'phone', 'wallet'
+                    'phone', 'wallet', 'status'
                 )
             }
         )
