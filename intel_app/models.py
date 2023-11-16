@@ -26,7 +26,7 @@ class CustomUser(AbstractUser):
 class AdminInfo(models.Model):
     name = models.CharField(max_length=250, null=True, blank=True)
     phone_number = models.BigIntegerField(null=True, blank=True)
-    momo_number = models.PositiveBigIntegerField(null=True, blank=True)
+    momo_numberr = models.PositiveBigIntegerField(null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     choices = (
         ("MTN Mobile Money", "MTN Mobile Money"),

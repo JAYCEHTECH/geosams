@@ -450,7 +450,7 @@ def request_successful(request, reference):
     admin = models.AdminInfo.objects.filter().first()
     context = {
         "name": admin.name,
-        "number": f"0{admin.momo_number}",
+        "number": f"0{admin.momo_numberr}",
         "channel": admin.payment_channel,
         "reference": reference
     }
