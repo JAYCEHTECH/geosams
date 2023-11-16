@@ -29,12 +29,6 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AddField(
-            model_name='admininfo',
-            name='payment_channel',
-            field=models.CharField(choices=[('MTN Mobile Money', 'MTN Mobile Money'), ('Vodafone Cash', 'Vodafone Cash'), ('AT Money', 'AT Money')], default='MTN Mobile Money', max_length=250),
-            preserve_default=False,
-        ),
-        migrations.AddField(
             model_name='customuser',
             name='status',
             field=models.CharField(choices=[('User', 'User'), ('Agent', 'Agent')], default='User', max_length=250),
