@@ -11,6 +11,11 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=250, null=False, blank=False)
     phone = models.PositiveIntegerField(null=True, blank=True)
     wallet = models.FloatField(null=True, blank=True, default=0.0)
+    choices = (
+        ("User", "User"),
+        ("Agent", "Agent"),
+    )
+    status = models.CharField(max_length=250, null=False, blank=False, choices=choices, default="User")
     password1 = models.CharField(max_length=100, null=False, blank=False)
     password2 = models.CharField(max_length=100, null=False, blank=False)
 
@@ -52,6 +57,16 @@ class IshareBundlePrice(models.Model):
         if self.bundle_volume >= 1000:
             return f"GHS{self.price} - {self.bundle_volume/1000}GB"
         return f"GHS{self.price} - {self.bundle_volume}MB"
+
+
+class AgentIshareBundlePrice(models.Model):
+    price = models.FloatField(null=False, blank=False)
+    bundle_volume = models.FloatField(null=False, blank=False)
+
+    def __str__(self):
+        if self.bundle_volume >= 1000:
+            return f"GHS{self.price} - {self.bundle_volume/1000}GB"
+        return f"GHS{self.price} - {self.bundle_volume}MB"
     
 
 class MTNTransaction(models.Model):
@@ -73,6 +88,17 @@ class MTNTransaction(models.Model):
     
 
 class MTNBundlePrice(models.Model):
+    price = models.FloatField(null=False, blank=False)
+    bundle_volume = models.FloatField(null=False, blank=False)
+
+
+    def __str__(self):
+        if self.bundle_volume >= 1000:
+            return f"GHS{self.price} - {self.bundle_volume/1000}GB"
+        return f"GHS{self.price} - {self.bundle_volume}MB"
+
+
+class AgentMTNBundlePrice(models.Model):
     price = models.FloatField(null=False, blank=False)
     bundle_volume = models.FloatField(null=False, blank=False)
 

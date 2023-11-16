@@ -22,12 +22,26 @@ class IShareBundleForm(forms.Form):
     phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control phone', 'placeholder': '0270000000'}))
     offers = forms.ModelChoiceField(queryset=models.IshareBundlePrice.objects.all(), to_field_name='price', empty_label=None,
                                widget=forms.Select(attrs={'class': 'form-control airtime-input'}))
+
+    def __init__(self, status, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if status == "User":
+            self.fields['offers'].queryset = models.IshareBundlePrice.objects.all()
+        elif status == "Agent":
+            self.fields['offers'].queryset = models.AgentIshareBundlePrice.objects.all()
             
 
 class MTNForm(forms.Form):
     phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control mtn-phone', 'placeholder': '0200000000'}))
     offers = forms.ModelChoiceField(queryset=models.MTNBundlePrice.objects.all().order_by('price'), to_field_name='price', empty_label=None,
                                widget=forms.Select(attrs={'class': 'form-control mtn-offer'}))
+
+    def __init__(self, status, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if status == "User":
+            self.fields['offers'].queryset = models.MTNBundlePrice.objects.all()
+        elif status == "Agent":
+            self.fields['offers'].queryset = models.AgentMTNBundlePrice.objects.all()
 
 
 class CreditUserForm(forms.Form):
