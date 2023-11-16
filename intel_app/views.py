@@ -418,7 +418,7 @@ def topup_info(request):
         amount = request.POST.get("amount")
         print(amount)
         reference = helper.top_up_ref_generator()
-        new_topup_request = models.TopUpRequest.objects.create(
+        new_topup_request = models.TopUpRequestt.objects.create(
             user=request.user,
             amount=amount,
             reference=reference,
@@ -459,7 +459,7 @@ def request_successful(request, reference):
 
 def topup_list(request):
     if request.user.is_superuser:
-        topup_requests = models.TopUpRequest.objects.all().order_by('date').reverse()
+        topup_requests = models.TopUpRequestt.objects.all().order_by('date').reverse()
         context = {
             'requests': topup_requests,
         }
@@ -472,7 +472,7 @@ def topup_list(request):
 @login_required(login_url='login')
 def credit_user_from_list(request, reference):
     if request.user.is_superuser:
-        crediting = models.TopUpRequest.objects.filter(reference=reference).first()
+        crediting = models.TopUpRequestt.objects.filter(reference=reference).first()
         user = crediting.user
         custom_user = models.CustomUser.objects.get(username=user.username)
         amount = crediting.amount
